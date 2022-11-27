@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "tye-vnext.cli": {
+      "commandName": "Project",
+      "workingDirectory": "$(ProjectDir)",
+      "environmentVariables": {
+      },
+      "commandLineArgs": "../../../notified-main/src/Notified.Services.KeyVaultService/"
+    }
+  }
+}
