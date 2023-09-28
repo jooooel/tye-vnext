@@ -1,10 +1,18 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using tye_vnext.cli;
 
-var app = new CommandApp<RunCommand>();
+var registrations = new ServiceCollection();
+// registrations.AddSingleton<IGreeter, HelloWorldGreeter>();
+
+// Create a type registrar and register any dependencies.
+// A type registrar is an adapter for a DI framework.
+var registrar = new TypeRegistrar(registrations);
+
+var app = new CommandApp<RunCommand>(registrar);
 return app.Run(args);
 
 internal sealed class RunCommand : Command<RunCommand.Settings>
@@ -27,6 +35,8 @@ internal sealed class RunCommand : Command<RunCommand.Settings>
         }
 
         AnsiConsole.MarkupLine($"Running Tye from [green]{fileInfo.FullName}[/]");
+        
+        var app = new Application(application.Name, application.Source, application.DashboardPort, services, application.ContainerEngine) { Network = application.Network };
         return 0;
     }
 
