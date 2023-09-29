@@ -1,0 +1,11 @@
+name: notified
+
+services:
+  - name: notified-api-app
+    project: /Users/joel/Documents/Development/dm-gnw/dm-monitoring-main/src/Notified.Api.App/Notified.Api.App.csproj
+    bindings:
+      - port: 44305
+        protocol: https
+    tags:
+      - api
+      - appapi
